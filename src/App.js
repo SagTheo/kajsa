@@ -19,8 +19,32 @@ function App() {
     setEndDate(e.target.value)
   }
 
+  const controlDate = (date, nameDate) => {
+    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/
+
+    if (dateRegex.test(date.trim())) {
+      const dateSplit = date.split('/')
+
+      if (Number(dateSplit[0]) < 1 || Number(dateSplit[0]) > 12) {
+        alert(`The month for ${nameDate} must be between 01 and 12 included`)
+      }
+
+      if (Number(dateSplit[1]) < 1 || Number(dateSplit[1]) > 31) {
+        alert(`The day for ${nameDate} must be between 01 and 31 included`)
+      }
+    } else {
+      alert(nameDate + ' must have the mm/dd/yyyy format')
+    }
+  }
+
+  const chronology = (arrivalDate, endDate) => {
+    
+  }
+
   const checkForEvents = () => {
-    console.log(`You are going to ${place} on ${arrivalDate} and you will leave on ${endDate}`)
+    controlDate(arrivalDate, 'Arrival date')
+    controlDate(endDate, 'End date')
+    // console.log(`You are going to ${place} on ${arrivalDate} and you will leave on ${endDate}`)
   }
 
   return (
