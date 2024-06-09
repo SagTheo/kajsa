@@ -6,6 +6,9 @@ function App() {
   const [place, setPlace] = useState()
   const [arrivalDate, setArrivalDate] = useState()
   const [endDate, setEndDate] = useState()
+  const [errorPlace, setErrorPlace] = useState()
+  const [errorArrivalDate, setErrorArrivalDate] = useState()
+  const [errorEndDate, setErrorEndDate] = useState()
 
   const handleChangePlace = e => {
     setPlace(e.target.value)
@@ -17,6 +20,16 @@ function App() {
 
   const handleChangeEndDate = e => {
     setEndDate(e.target.value)
+  }
+
+  const controlInput = (input, inputName, setInputName) => {
+    if (input === undefined) {
+      setInputName(inputName + ' can not be empty')
+
+      return
+    }
+
+    return true
   }
 
   const controlDate = (date, nameDate) => {
@@ -68,8 +81,12 @@ function App() {
   }
 
   const checkForEvents = () => {
-    if (controlDate(arrivalDate, 'Arrival date') && controlDate(endDate, 'End date')) {
-      chronology(arrivalDate, endDate)
+    if (controlInput(place, 'Place', setErrorPlace) &&
+        controlInput(arrivalDate, 'Arrival date', setErrorArrivalDate) &&
+        controlInput(endDate, 'End date', setErrorEndDate)) {
+      if (controlDate(arrivalDate, 'Arrival date') && controlDate(endDate, 'End date')) {
+        chronology(arrivalDate, endDate)
+      }
     }
   }
 
@@ -78,13 +95,16 @@ function App() {
       <div>
         <UserInput name={'place'} 
                    placeholder={'Place you are visiting'} 
-                   handleChange={handleChangePlace} />
+                   handleChange={handleChangePlace}
+                   errorMessage={errorPlace} />
         <UserInput name={'startDate'} 
                    placeholder={'Arrival date (mm/dd/yyyy)'} 
-                   handleChange={handleChangeArrivalDate} />
+                   handleChange={handleChangeArrivalDate}
+                   errorMessage={errorArrivalDate} />
         <UserInput name={'endDate'} 
                    placeholder={'Departure date(mm/dd/yyyy)'} 
-                   handleChange={handleChangeEndDate} />  
+                   handleChange={handleChangeEndDate}
+                   errorMessage={errorEndDate} />  
       </div>
 
       <button onClick={() => checkForEvents()}>Check for events</button>
