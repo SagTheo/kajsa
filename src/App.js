@@ -23,69 +23,81 @@ function App() {
   }
 
   const controlInput = (input, inputName, setInputName) => {
-    if (input === undefined) {
+    const regex = /^\s*$/
+    
+    if (input === undefined || regex.test(input)) {
+      console.log('hey')
       setInputName(inputName + ' can not be empty')
 
       return
     }
 
+    setInputName('')
+
     return true
   }
 
-  const controlDate = (date, nameDate) => {
+  const controlDate = (date, setErrorMessage) => {
     const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/
 
     if (dateRegex.test(date.trim())) {
       const dateSplit = date.split('/')
 
       if (Number(dateSplit[0]) < 1 || Number(dateSplit[0]) > 12) {
-        alert(`The month for ${nameDate} must be between 01 and 12 included`)
+        setErrorMessage('Month must be between 01 and 12 included')
 
         return 
       }
 
       if (Number(dateSplit[1]) < 1 || Number(dateSplit[1]) > 31) {
-        alert(`The day for ${nameDate} must be between 01 and 31 included`)
+        setErrorMessage('Day must be between 01 and 31 included')
 
         return 
       }
     } else {
-      alert(nameDate + ' must have the mm/dd/yyyy format')
+      setErrorMessage('Date must have the mm/dd/yyyy format')
 
       return
     }
 
+    setErrorMessage('')
+
     return true
   }
 
-  const chronology = (arrivalDate, endDate) => {
+  const chronology = (arrivalDate, endDate, setEndDateErrMessage) => {
     const arrivalDateSplit = arrivalDate.split('/')
     const endDateSplit = endDate.split('/')
 
     if (Number(endDateSplit[2]) < Number(arrivalDateSplit[2])) {
-      alert('The year for the end date can not be anterior to the year for the arrival date')
+      setEndDateErrMessage('The year for the end date can not be anterior to the year for the arrival date')
     }
 
     if (Number(endDateSplit[2]) === Number(arrivalDateSplit[2])) {
       if (Number(endDateSplit[0]) < Number(arrivalDateSplit[0])) {
-        alert('The month for the end date can not be anterior to the month for the arrival date')
+        setEndDateErrMessage('The month for the end date can not be anterior to the month for the arrival date')
       }  
     }
     
 
     if (Number(endDateSplit[0]) === Number(arrivalDateSplit[0]) && Number(endDateSplit[2]) === Number(arrivalDateSplit[2])) {
       if (Number(endDateSplit[1]) < Number(arrivalDateSplit[1])) {
-        alert('The day for the end date can not be anterior to the day for the arrival date')
+        setEndDateErrMessage('The day for the end date can not be anterior to the day for the arrival date')
       }
     }
   }
 
   const checkForEvents = () => {
-    if (controlInput(place, 'Place', setErrorPlace) &&
-        controlInput(arrivalDate, 'Arrival date', setErrorArrivalDate) &&
-        controlInput(endDate, 'End date', setErrorEndDate)) {
-      if (controlDate(arrivalDate, 'Arrival date') && controlDate(endDate, 'End date')) {
-        chronology(arrivalDate, endDate)
+    const checkPlace = controlInput(place, 'Place', setErrorPlace)
+    const checkArrivalDate = controlInput(arrivalDate, 'Arrival date', setErrorArrivalDate)
+    const checkEndDate = controlInput(endDate, 'End date', setErrorEndDate)
+
+    if (checkPlace && checkArrivalDate && checkEndDate) {
+      const checkArrivalDateBis = controlDate(arrivalDate, setErrorArrivalDate)
+      const checkEndDateBis = controlDate(endDate, setErrorEndDate)
+
+      if (checkArrivalDateBis && checkEndDateBis) {
+        chronology(arrivalDate, endDate, setErrorEndDate)
       }
     }
   }
