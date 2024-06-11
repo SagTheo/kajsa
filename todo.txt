@@ -1,1 +1,2 @@
---> implement error messages instead of alert pop-ups
+--> add fake database of shows with places and dates
+--> implement functionality to check if there are events available given the data entered by user

@@ -1,3 +1,17 @@
 .container {
     display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.err {
+    color: red;
+}
+
+.outlineRed {
+    outline: 1px solid red;
+}
+
+.noOutline {
+    outline: none;
 }

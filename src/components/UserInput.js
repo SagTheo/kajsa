@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../css/UserInput.module.css'
 
-const UserInput = ({name, placeholder, handleChange, errorMessage}) => {
+const UserInput = ({name, placeholder, handleChange, errorMessage, red}) => {
   return (
     <div className={styles.container}>
       <input type='text' 
@@ -9,8 +9,9 @@ const UserInput = ({name, placeholder, handleChange, errorMessage}) => {
               id={name} 
               placeholder={placeholder}
               onChange={handleChange}
+              className={red ? styles.outlineRed : styles.noOutline}
       />
-      <div>{errorMessage}</div>
+      <div className={styles.err}>{errorMessage}</div>
     </div>
       
   )
