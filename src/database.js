@@ -1,7 +1,7 @@
 const database = {
     'las vegas' : [
         {startDate: '05/19/2024', endDate: '05/24/2024', event: 'Potted Potter'},
-        {startDate: '05/20/2024', endDate: '05/26/2024', event: 'The Iluminates'}
+        {startDate: '05/20/2024', endDate: '05/26/2024', event: 'The Illuminates'}
     ], 
     'los angeles' : [
         {startDate: '06/02/2024', endDate: '06/02/2024', event: 'Justin Timberlake concert'},
@@ -14,3 +14,5 @@ const database = {
         {startDate: '08/10/2024', endDate: '08/11/2024', event: 'Kevin Hart stand-up'}
     ]
 }
+
+export default database

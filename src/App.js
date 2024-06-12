@@ -1,6 +1,7 @@
 import './App.css';
 import UserInput from './components/UserInput';
 import { useState } from 'react';
+import database from './database';
 
 function App() {
   const [place, setPlace] = useState()
@@ -80,12 +81,16 @@ function App() {
     if (Number(endDateSplit[2]) < Number(arrivalDateSplit[2])) {
       setEndDateErrMessage('The year for the end date can not be anterior to the year for the arrival date')
       setRed(true)
+
+      return
     }
 
     if (Number(endDateSplit[2]) === Number(arrivalDateSplit[2])) {
       if (Number(endDateSplit[0]) < Number(arrivalDateSplit[0])) {
         setEndDateErrMessage('The month for the end date can not be anterior to the month for the arrival date')
         setRed(true)
+
+        return
       }  
     }
     
@@ -94,7 +99,19 @@ function App() {
       if (Number(endDateSplit[1]) < Number(arrivalDateSplit[1])) {
         setEndDateErrMessage('The day for the end date can not be anterior to the day for the arrival date')
         setRed(true)
+
+        return
       } 
+    }
+
+    return true
+  }
+
+  const checkEvents = (place, arrivalDate, endDate) => {
+    if (Object.hasOwn(database, place.toLowerCase())) {
+      console.log(database[place.toLowerCase()])
+    } else {
+      console.log(place + ' not in database')
     }
   }
 
@@ -108,7 +125,9 @@ function App() {
       const checkEndDateBis = controlDate(endDate, setErrorEndDate, setRedEndDate)
 
       if (checkArrivalDateBis && checkEndDateBis) {
-        chronology(arrivalDate, endDate, setErrorEndDate, setRedEndDate)
+        if (chronology(arrivalDate, endDate, setErrorEndDate, setRedEndDate)) {
+          checkEvents(place, arrivalDate, endDate)
+        }
       }
     }
   }
