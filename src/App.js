@@ -94,7 +94,7 @@ function App() {
       if (Number(endDateSplit[1]) < Number(arrivalDateSplit[1])) {
         setEndDateErrMessage('The day for the end date can not be anterior to the day for the arrival date')
         setRed(true)
-      }
+      } 
     }
   }
 
