@@ -9,9 +9,9 @@ const database = {
         {startDate: '08/10/2024', endDate: '05/19/2024', event: 'Kevin Hart stand-up'}
     ],
     'paris' : [
-        {startDate: '09/11/2024', endDate: '09/11/2024', event: 'Lukas Graham concert'},
-        {startDate: '10/21/2024', endDate: '10/21/2024', event: 'Jason Derulo concert'},
-        {startDate: '08/10/2024', endDate: '08/11/2024', event: 'Kevin Hart stand-up'}
+        {startDate: '09/11/2023', endDate: '09/11/2023', event: 'Lukas Graham concert'},
+        {startDate: '10/21/2024', endDate: '10/21/2024', event: 'Taylor Swift concert'},
+        {startDate: '08/10/2024', endDate: '08/11/2024', event: 'Ricky Gervais stand-up'}
     ]
 }
 

@@ -108,8 +108,35 @@ function App() {
   }
 
   const checkEvents = (place, arrivalDate, endDate) => {
-    if (Object.hasOwn(database, place.toLowerCase())) {
-      console.log(database[place.toLowerCase()])
+    const placeLowerCase = place.toLowerCase()
+
+    if (Object.hasOwn(database, placeLowerCase)) {
+      const arrivalDateSplit = arrivalDate.split('/')
+      const endDateSplit = endDate.split('/')
+      const eventsAvailable = []
+
+      // Need to work with arrival and end dates simultaneously
+      database[placeLowerCase].forEach(event => {
+        const eventDateSplit = event['startDate'].split('/')
+
+        if (Number(arrivalDateSplit[2]) > Number(eventDateSplit[2])) {
+          eventsAvailable.push(event)
+        }
+
+        if (Number(arrivalDateSplit[2]) === Number(eventDateSplit[2])) {
+          if (Number(arrivalDateSplit[0]) > Number(eventDateSplit[0])) {
+            eventsAvailable.push(event)
+          }
+
+          if (Number(arrivalDateSplit[0]) === Number(eventDateSplit[0])) {
+            if (Number(arrivalDateSplit[1]) >= Number(eventDateSplit[1])) {
+              eventsAvailable.push(event)
+            }
+          }
+        }
+      })
+
+      console.log(eventsAvailable)
     } else {
       console.log(place + ' not in database')
     }
