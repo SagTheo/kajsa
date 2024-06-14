@@ -111,28 +111,23 @@ function App() {
     const placeLowerCase = place.toLowerCase()
 
     if (Object.hasOwn(database, placeLowerCase)) {
-      const arrivalDateSplit = arrivalDate.split('/')
-      const endDateSplit = endDate.split('/')
+      const arrivalDateFormatted = new Date(arrivalDate)
+      const endDateFormatted = new Date(endDate)
+      const arrivalDateTimestamp = arrivalDateFormatted.getTime()
+      const endDateTimestamp = endDateFormatted.getTime()
       const eventsAvailable = []
 
-      // Need to work with arrival and end dates simultaneously
+      // Do more tests
       database[placeLowerCase].forEach(event => {
-        const eventDateSplit = event['startDate'].split('/')
+        const eventStartDateFormatted = new Date(event['startDate'])
+        const eventEndDateFormatted = new Date(event['endDate'])
+        const eventStartDateTimestamp = eventStartDateFormatted.getTime()
+        const eventEndDateTimestamp = eventEndDateFormatted.getTime()
 
-        if (Number(arrivalDateSplit[2]) > Number(eventDateSplit[2])) {
+        if (arrivalDateTimestamp >= eventStartDateTimestamp && arrivalDateTimestamp <= eventEndDateTimestamp) {
           eventsAvailable.push(event)
-        }
-
-        if (Number(arrivalDateSplit[2]) === Number(eventDateSplit[2])) {
-          if (Number(arrivalDateSplit[0]) > Number(eventDateSplit[0])) {
-            eventsAvailable.push(event)
-          }
-
-          if (Number(arrivalDateSplit[0]) === Number(eventDateSplit[0])) {
-            if (Number(arrivalDateSplit[1]) >= Number(eventDateSplit[1])) {
-              eventsAvailable.push(event)
-            }
-          }
+        } else if (endDateTimestamp >= eventStartDateTimestamp && endDateTimestamp <= eventEndDateTimestamp) {
+          eventsAvailable.push(event)
         }
       })
 
