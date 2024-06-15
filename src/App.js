@@ -117,16 +117,18 @@ function App() {
       const endDateTimestamp = endDateFormatted.getTime()
       const eventsAvailable = []
 
-      // Do more tests
+      // Do more tests 
       database[placeLowerCase].forEach(event => {
         const eventStartDateFormatted = new Date(event['startDate'])
         const eventEndDateFormatted = new Date(event['endDate'])
         const eventStartDateTimestamp = eventStartDateFormatted.getTime()
         const eventEndDateTimestamp = eventEndDateFormatted.getTime()
 
-        if (arrivalDateTimestamp >= eventStartDateTimestamp && arrivalDateTimestamp <= eventEndDateTimestamp) {
+        if (eventStartDateTimestamp >= arrivalDateTimestamp && eventStartDateTimestamp <= endDateTimestamp) {
           eventsAvailable.push(event)
-        } else if (endDateTimestamp >= eventStartDateTimestamp && endDateTimestamp <= eventEndDateTimestamp) {
+        } else if (eventEndDateTimestamp >= arrivalDateTimestamp && eventEndDateTimestamp <= endDateTimestamp) {
+          eventsAvailable.push(event)
+        } else if (arrivalDateTimestamp >= eventStartDateTimestamp && arrivalDateTimestamp <= eventEndDateTimestamp) {
           eventsAvailable.push(event)
         }
       })
