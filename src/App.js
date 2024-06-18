@@ -14,7 +14,6 @@ function App() {
   const [redArrDate, setRedArrDate] = useState(false)
   const [redEndDate, setRedEndDate] = useState(false)
   const [eventsAvailable, setEventsAvailable] = useState([])
-  const [test, setTest] = useState(0)
 
   const handleChangePlace = e => {
     setPlace(e.target.value)
@@ -111,70 +110,31 @@ function App() {
 
   const checkEvents = (place, arrivalDate, endDate) => {
     const placeLowerCase = place.toLowerCase()
+    const events = []
 
-    if (placeLowerCase === 'paris') {
-      setTest(1)
-    } else {
-      setTest(0)
+    if (Object.hasOwn(database, placeLowerCase)) {
+      const arrivalDateFormatted = new Date(arrivalDate)
+      const endDateFormatted = new Date(endDate)
+      const arrivalDateTimestamp = arrivalDateFormatted.getTime()
+      const endDateTimestamp = endDateFormatted.getTime()
+ 
+      database[placeLowerCase].forEach(event => {
+        const eventStartDateFormatted = new Date(event['startDate'])
+        const eventEndDateFormatted = new Date(event['endDate'])
+        const eventStartDateTimestamp = eventStartDateFormatted.getTime()
+        const eventEndDateTimestamp = eventEndDateFormatted.getTime()
+
+        if (eventStartDateTimestamp >= arrivalDateTimestamp && eventStartDateTimestamp <= endDateTimestamp) {
+          events.push(event)
+        } else if (eventEndDateTimestamp >= arrivalDateTimestamp && eventEndDateTimestamp <= endDateTimestamp) {
+          events.push(event)
+        } else if (arrivalDateTimestamp >= eventStartDateTimestamp && arrivalDateTimestamp <= eventEndDateTimestamp) {
+          events.push(event)
+        }
+      })
     }
 
-    console.log(test)
-
-    // setEventsAvailable([])
-    // console.log(eventsAvailable)
-
-    // if (Object.hasOwn(database, placeLowerCase)) {
-    //   const arrivalDateFormatted = new Date(arrivalDate)
-    //   const endDateFormatted = new Date(endDate)
-    //   const arrivalDateTimestamp = arrivalDateFormatted.getTime()
-    //   const endDateTimestamp = endDateFormatted.getTime()
- 
-    //   database[placeLowerCase].forEach(event => {
-    //     const eventStartDateFormatted = new Date(event['startDate'])
-    //     const eventEndDateFormatted = new Date(event['endDate'])
-    //     const eventStartDateTimestamp = eventStartDateFormatted.getTime()
-    //     const eventEndDateTimestamp = eventEndDateFormatted.getTime()
-
-    //     if (eventStartDateTimestamp >= arrivalDateTimestamp && eventStartDateTimestamp <= endDateTimestamp) {
-    //       setEventsAvailable([...eventsAvailable, event])
-    //     } else if (eventEndDateTimestamp >= arrivalDateTimestamp && eventEndDateTimestamp <= endDateTimestamp) {
-    //       setEventsAvailable([...eventsAvailable, event])
-    //     } else if (arrivalDateTimestamp >= eventStartDateTimestamp && arrivalDateTimestamp <= eventEndDateTimestamp) {
-    //       setEventsAvailable([...eventsAvailable, event])
-    //     }
-    //   })
-    // }
-
-    // setTest(1)
-    // console.log(test)
-
-    // setEventsAvailable([...eventsAvailable, 1])
-    // console.log(eventsAvailable)
-
-    // if (Object.hasOwn(database, placeLowerCase)) {
-    //   const arrivalDateFormatted = new Date(arrivalDate)
-    //   const endDateFormatted = new Date(endDate)
-    //   const arrivalDateTimestamp = arrivalDateFormatted.getTime()
-    //   const endDateTimestamp = endDateFormatted.getTime()
-    //   const events = []
- 
-    //   database[placeLowerCase].forEach(event => {
-    //     const eventStartDateFormatted = new Date(event['startDate'])
-    //     const eventEndDateFormatted = new Date(event['endDate'])
-    //     const eventStartDateTimestamp = eventStartDateFormatted.getTime()
-    //     const eventEndDateTimestamp = eventEndDateFormatted.getTime()
-
-    //     if (eventStartDateTimestamp >= arrivalDateTimestamp && eventStartDateTimestamp <= endDateTimestamp) {
-    //       events.push(event)
-    //     } else if (eventEndDateTimestamp >= arrivalDateTimestamp && eventEndDateTimestamp <= endDateTimestamp) {
-    //       events.push(event)
-    //     } else if (arrivalDateTimestamp >= eventStartDateTimestamp && arrivalDateTimestamp <= eventEndDateTimestamp) {
-    //       events.push(event)
-    //     }
-    //   })
-
-    //   console.log(events)
-    // }
+    setEventsAvailable(events)
   }
 
   const checkForEvents = () => {
@@ -221,17 +181,11 @@ function App() {
           eventsAvailable.length === 0 ?
           <div>No events</div>
           :
-          eventsAvailable.map(event => {
+          eventsAvailable.map((event, index) => {
             return (
-              <div>{event.event} from {event.startDate} to {event.endDate}</div>
+              <div key={index}>{event.event} from {event.startDate} until {event.endDate}</div>
             )
           })
-        }
-      </div>
-
-      <div>
-        {
-          test === 1 ? <div>1</div> : <div>0</div>
         }
       </div>
     </div>
