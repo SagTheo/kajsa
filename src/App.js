@@ -142,6 +142,8 @@ function App() {
     const checkArrivalDate = controlInput(arrivalDate, 'Arrival date', setErrorArrivalDate, setRedArrDate)
     const checkEndDate = controlInput(endDate, 'End date', setErrorEndDate, setRedEndDate)
 
+    setEventsAvailable([])
+
     if (checkPlace && checkArrivalDate && checkEndDate) {
       const checkArrivalDateBis = controlDate(arrivalDate, setErrorArrivalDate, setRedArrDate)
       const checkEndDateBis = controlDate(endDate, setErrorEndDate, setRedEndDate)
@@ -156,7 +158,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div className='topBar'>
         <UserInput name={'place'} 
                    placeholder={'Place you are visiting'} 
                    handleChange={handleChangePlace}
@@ -172,14 +174,14 @@ function App() {
                    handleChange={handleChangeEndDate}
                    errorMessage={errorEndDate}
                    red={redEndDate} />  
+        
+        <div className='button' onClick={() => checkForEvents()}>Check for events</div>
       </div>
-
-      <button onClick={() => checkForEvents()}>Check for events</button>
       
       <div className='displayedEvents'>
         {
           eventsAvailable.length === 0 ?
-          <div>No events</div>
+          <div>No events found</div>
           :
           eventsAvailable.map((event, index) => {
             return (
