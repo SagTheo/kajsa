@@ -3,6 +3,8 @@
     flex-direction: column;
     gap: 5px;
     margin-bottom: 5px;
+    width: 200px;
+    position: relative;
 }
 
 .userInput {
@@ -13,7 +15,9 @@
 }
 
 .err {
+    position: absolute;
     color: red;
+    top: 35px;
 }
 
 .outlineRed {

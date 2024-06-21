@@ -1,2 +1,0 @@
---> add styles
-        --> display error messages in a bubble the width of the user input it corresponds to

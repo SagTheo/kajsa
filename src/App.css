@@ -22,3 +22,15 @@
     cursor: pointer;
     background-color: rgb(3, 219, 3);
 }
+
+.displayedEvents {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.displayedEvents div:first-child {
+    font-weight: bold;
+}

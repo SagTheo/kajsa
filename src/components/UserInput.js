@@ -12,8 +12,7 @@ const UserInput = ({name, placeholder, handleChange, errorMessage, red}) => {
               className={`${red ? styles.outlineRed : styles.noOutline} ${styles.userInput}`}
       />
       <div className={styles.err}>{errorMessage}</div>
-    </div>
-      
+    </div> 
   )
 }
 

@@ -183,11 +183,16 @@ function App() {
           eventsAvailable.length === 0 ?
           <div>No events found</div>
           :
-          eventsAvailable.map((event, index) => {
-            return (
-              <div key={index}>{event.event} from {event.startDate} until {event.endDate}</div>
-            )
-          })
+          <>
+          <div>Events available</div>
+          {
+            eventsAvailable.map((event, index) => {
+              return (
+                <div key={index}>{event.event} from {event.startDate} until {event.endDate}</div>
+              )
+            })
+          }
+          </>
         }
       </div>
     </div>
