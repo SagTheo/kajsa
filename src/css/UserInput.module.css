@@ -14,10 +14,17 @@
     border-radius: 5px;
 }
 
+.hide {
+    display: none;
+}
+
 .err {
     position: absolute;
     color: red;
     top: 35px;
+    background-color: rgb(233, 232, 232);
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .outlineRed {

@@ -181,14 +181,17 @@ function App() {
       <div className='displayedEvents'>
         {
           eventsAvailable.length === 0 ?
-          <div>No events found</div>
+          <div className='bold'>No events found</div>
           :
           <>
-          <div>Events available</div>
+          <div className='bold'>Events available</div>
           {
             eventsAvailable.map((event, index) => {
               return (
-                <div key={index}>{event.event} from {event.startDate} until {event.endDate}</div>
+                <div className='displayedEvent'>
+                  <div key={index}>{event.event} from {event.startDate} until {event.endDate}</div>
+                  <button>Get tickets</button>
+                </div>
               )
             })
           }
