@@ -43,3 +43,24 @@
 .displayedEvent button {
     cursor: pointer;
 }
+
+/* Responsiveness */
+
+@media (max-width: 426px) {
+    .topBar {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .displayedEvent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .displayedEvent button {
+        width: fit-content;
+    }
+}

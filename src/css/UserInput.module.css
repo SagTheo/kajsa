@@ -34,3 +34,17 @@
 .noOutline {
     outline: none;
 }
+
+/* Responsiveness */
+
+@media (max-width: 426px) {
+    .container {
+        display: flex;
+        flex-direction: row;
+        width: 95vw;
+    }
+
+    .err {
+        position: static;
+    }
+}
