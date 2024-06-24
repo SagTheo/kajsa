@@ -2,6 +2,7 @@ import './App.css';
 import UserInput from './components/UserInput';
 import { useState } from 'react';
 import database from './database';
+import UserInputDate from './components/UserInputDate';
 
 function App() {
   const [place, setPlace] = useState()
@@ -164,16 +165,16 @@ function App() {
                    handleChange={handleChangePlace}
                    errorMessage={errorPlace}
                    red={redPlace} />
-        <UserInput name={'startDate'} 
+        <UserInputDate name={'startDate'} 
                    placeholder={'Arrival date (mm/dd/yyyy)'} 
                    handleChange={handleChangeArrivalDate}
                    errorMessage={errorArrivalDate}
                    red={redArrDate} />
-        <UserInput name={'endDate'} 
+        <UserInputDate name={'endDate'} 
                    placeholder={'Departure date(mm/dd/yyyy)'} 
                    handleChange={handleChangeEndDate}
                    errorMessage={errorEndDate}
-                   red={redEndDate} />  
+                   red={redEndDate} />
         
         <div className='button' onClick={() => checkForEvents()}>Check for events</div>
       </div>
