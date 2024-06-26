@@ -37,7 +37,7 @@ const UserInputDate = ({name, placeholder, handleChange, errorMessage, red}) => 
         <Calendar onChange={(value) => {
             const dayFormatted = value.getDate() < 10 ? `0${value.getDate()}` : value.getDate()
             const monthFormatted = value.getMonth() + 1 < 10 ? `0${value.getMonth() + 1}` : value.getMonth() + 1
-            const dateFormatted = `${dayFormatted}/${monthFormatted}/${value.getFullYear()}`
+            const dateFormatted = `${monthFormatted}/${dayFormatted}/${value.getFullYear()}`
             setDate(dateFormatted)
             }
           }
