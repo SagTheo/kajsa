@@ -16,6 +16,7 @@ const UserInputDate = ({name, placeholder, handleChange, errorMessage, red}) => 
                 id={name} 
                 placeholder={placeholder}
                 onChange={handleChange}
+                // Triggers warning (see console)
                 value={date}
                 className={`${red ? styles.outlineRed : styles.noOutline} ${styles.userInput}`}
         />
@@ -33,7 +34,15 @@ const UserInputDate = ({name, placeholder, handleChange, errorMessage, red}) => 
       {/* https://www.npmjs.com/package/react-calendar */}
       {
         displayCalendar ?
-        <Calendar onChange={(value) => setDate(value)} />
+        <Calendar onChange={(value) => {
+            const dayFormatted = value.getDate() < 10 ? `0${value.getDate()}` : value.getDate()
+            const monthFormatted = value.getMonth() + 1 < 10 ? `0${value.getMonth() + 1}` : value.getMonth() + 1
+            const dateFormatted = `${dayFormatted}/${monthFormatted}/${value.getFullYear()}`
+            setDate(dateFormatted)
+            }
+          }
+                  locale='en-US'
+        />
         :
         null
       }
