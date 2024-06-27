@@ -165,7 +165,7 @@ function App() {
                    handleChange={handleChangePlace}
                    errorMessage={errorPlace}
                    red={redPlace} />
-        <UserInputDate name={'startDate'} 
+        <UserInputDate 
                    placeholder={'Arrival date (mm/dd/yyyy)'} 
                    handleChange={handleChangeArrivalDate}
                    errorMessage={errorArrivalDate}

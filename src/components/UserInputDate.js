@@ -4,22 +4,21 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 
-const UserInputDate = ({name, placeholder, handleChange, errorMessage, red}) => {
+const UserInputDate = ({placeholder, handleChange, errorMessage, red}) => {
   const [displayCalendar, setDisplayCalendar] = useState(false)
-  const [date, setDate] = useState()
+  const [date, setDate] = useState(null)
 
   return (
     <div className={styles.container}>
       <div className={styles.inputAndIcon}>
-        <input type='text' 
-                name={name} 
-                id={name} 
-                placeholder={placeholder}
-                onChange={handleChange}
-                // Triggers warning (see console)
-                value={date}
-                className={`${red ? styles.outlineRed : styles.noOutline} ${styles.userInput}`}
-        />
+        <div className={`${red ? styles.outlineRed : styles.noOutline} ${styles.userInput}`}>
+          {
+            date ?
+            date
+            :
+            <span className={styles.placeholder}>{placeholder}</span>
+          }
+        </div>
         <svg xmlns="http://www.w3.org/2000/svg" 
             width="20" 
             height="20" 
@@ -38,6 +37,8 @@ const UserInputDate = ({name, placeholder, handleChange, errorMessage, red}) => 
             const dayFormatted = value.getDate() < 10 ? `0${value.getDate()}` : value.getDate()
             const monthFormatted = value.getMonth() + 1 < 10 ? `0${value.getMonth() + 1}` : value.getMonth() + 1
             const dateFormatted = `${monthFormatted}/${dayFormatted}/${value.getFullYear()}`
+
+            setDisplayCalendar(!displayCalendar)
             setDate(dateFormatted)
             }
           }
