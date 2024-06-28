@@ -5,9 +5,9 @@ import database from './database';
 import UserInputDate from './components/UserInputDate';
 
 function App() {
-  const [place, setPlace] = useState()
-  const [arrivalDate, setArrivalDate] = useState()
-  const [endDate, setEndDate] = useState()
+  const [place, setPlace] = useState(null)
+  const [arrivalDate, setArrivalDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
   const [errorPlace, setErrorPlace] = useState()
   const [errorArrivalDate, setErrorArrivalDate] = useState()
   const [errorEndDate, setErrorEndDate] = useState()
@@ -20,51 +20,11 @@ function App() {
     setPlace(e.target.value)
   }
 
-  const handleChangeArrivalDate = e => {
-    setArrivalDate(e.target.value)
-  }
-
-  const handleChangeEndDate = e => {
-    setEndDate(e.target.value)
-  }
-
   const controlInput = (input, inputName, setErrorMessage, setRed) => {
     const regex = /^\s*$/
     
-    if (input === undefined || regex.test(input)) {
+    if (input === null || regex.test(input)) {
       setErrorMessage(inputName + ' can not be empty')
-      setRed(true)
-
-      return
-    }
-
-    setErrorMessage('')
-    setRed(false)
-
-    return true
-  }
-
-  const controlDate = (date, setErrorMessage, setRed) => {
-    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/
-
-    if (dateRegex.test(date.trim())) {
-      const dateSplit = date.split('/')
-
-      if (Number(dateSplit[0]) < 1 || Number(dateSplit[0]) > 12) {
-        setErrorMessage('Month must be between 01 and 12 included')
-        setRed(true)
-
-        return 
-      }
-
-      if (Number(dateSplit[1]) < 1 || Number(dateSplit[1]) > 31) {
-        setErrorMessage('Day must be between 01 and 31 included')
-        setRed(true)
-
-        return 
-      }
-    } else {
-      setErrorMessage('Date must have the mm/dd/yyyy format')
       setRed(true)
 
       return
@@ -146,13 +106,8 @@ function App() {
     setEventsAvailable([])
 
     if (checkPlace && checkArrivalDate && checkEndDate) {
-      const checkArrivalDateBis = controlDate(arrivalDate, setErrorArrivalDate, setRedArrDate)
-      const checkEndDateBis = controlDate(endDate, setErrorEndDate, setRedEndDate)
-
-      if (checkArrivalDateBis && checkEndDateBis) {
-        if (chronology(arrivalDate, endDate, setErrorEndDate, setRedEndDate)) {
-          checkEvents(place, arrivalDate, endDate)
-        }
+      if (chronology(arrivalDate, endDate, setErrorEndDate, setRedEndDate)) {
+        checkEvents(place, arrivalDate, endDate)
       }
     }
   }
@@ -167,12 +122,14 @@ function App() {
                    red={redPlace} />
         <UserInputDate 
                    placeholder={'Arrival date (mm/dd/yyyy)'} 
-                   handleChange={handleChangeArrivalDate}
+                   setDate={setArrivalDate}
+                   date={arrivalDate}
                    errorMessage={errorArrivalDate}
                    red={redArrDate} />
         <UserInputDate name={'endDate'} 
                    placeholder={'Departure date(mm/dd/yyyy)'} 
-                   handleChange={handleChangeEndDate}
+                   setDate={setEndDate}
+                   date={endDate}
                    errorMessage={errorEndDate}
                    red={redEndDate} />
         

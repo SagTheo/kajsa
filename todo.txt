@@ -1,2 +1,0 @@
---> pass arrivalDate and endDate state keys to UserInputDate to update the value when date is 
-    chosen from calendar
