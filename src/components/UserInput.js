@@ -9,7 +9,7 @@ const UserInput = ({name, placeholder, handleChange, errorMessage, red}) => {
               id={name} 
               placeholder={placeholder}
               onChange={handleChange}
-              className={`${red ? styles.outlineRed : styles.noOutline} ${styles.userInput}`}
+              className={`${red ? styles.outlineRed : styles.noOutline} ${styles.userInput} ${styles.userInputPlace}`}
       />
       <div className={red ? styles.err : styles.hide}>{errorMessage}</div>
     </div> 

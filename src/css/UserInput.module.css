@@ -3,12 +3,19 @@
     flex-direction: column;
     margin-bottom: 5px;
     gap: 5px;
-    width: 230px;
+    width: 250px;
     position: relative;
 }
 
-.userInput {
+.userInputPlace {
+    width: 240px;
+}
+
+.userInputDate {
     width: 220px;
+}
+
+.userInput {
     height: 20px;
     padding: 3px;
     border: 1px black solid;
@@ -42,13 +49,19 @@
     gap: 3px;
 }
 
-.calendar {
+.calendarIcon {
     cursor: pointer;
 }
 
 .placeholder {
     font-size: 0.9rem;
     color: rgb(140, 139, 139);
+}
+
+.calendar {
+    position: absolute;
+    top: 35px;
+    z-index: 1;
 }
 
 /* Responsiveness */

@@ -10,7 +10,7 @@ const UserInputDate = ({placeholder, setDate, date, errorMessage, red}) => {
   return (
     <div className={styles.container}>
       <div className={styles.inputAndIcon}>
-        <div className={`${red ? styles.outlineRed : styles.noOutline} ${styles.userInput}`}>
+        <div className={`${red ? styles.outlineRed : styles.noOutline} ${styles.userInput} ${styles.userInputDate}`}>
           {
             date ?
             date
@@ -22,7 +22,7 @@ const UserInputDate = ({placeholder, setDate, date, errorMessage, red}) => {
             width="20" 
             height="20" 
             fill="black" 
-            className={styles.calendar} 
+            className={styles.calendarIcon} 
             viewBox="0 0 16 16"
             onClick={() => setDisplayCalendar(!displayCalendar)}
         >
@@ -41,6 +41,7 @@ const UserInputDate = ({placeholder, setDate, date, errorMessage, red}) => {
             }
           }
                   locale='en-US'
+                  className={styles.calendar}
         />
         :
         null
